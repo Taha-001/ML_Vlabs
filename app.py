@@ -3,7 +3,7 @@ import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.datasets import load_diabetes, load_boston
+from sklearn.datasets import load_diabetes
 
 
 st.set_page_config(page_title='Machine Learning VLab for Random Forest',layout='wide')
@@ -112,12 +112,12 @@ if uploaded_file is not None:
 else:
     st.info('Awaiting for CSV file to be uploaded.')
     if st.button('Press to use Example Dataset'):
-        boston = load_boston()
-        X = pd.DataFrame(boston.data, columns=boston.feature_names)
-        Y = pd.Series(boston.target, name='response')
+        diabetes = load_diabetes()
+        X = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+        Y = pd.Series(diabetes.target, name='response')
         df = pd.concat( [X,Y], axis=1 )
 
-        st.markdown('The Boston housing dataset is used as the example.')
+        st.markdown('The Diabetes dataset is used as the example.')
         st.write(df.head(5))
 
         build_model(df)
